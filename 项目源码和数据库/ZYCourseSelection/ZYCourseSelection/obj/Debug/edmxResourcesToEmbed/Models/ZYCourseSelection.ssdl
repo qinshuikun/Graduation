@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZYCourseSelectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" Nullable="false" />
+    <Property Name="AdminName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdminSex" Type="bit" Nullable="false" />
+    <Property Name="AdminAge" Type="int" Nullable="false" />
+    <Property Name="AdminPhone" Type="int" Nullable="false" />
+    <Property Name="AdminBirthday" Type="datetime" Nullable="false" />
+    <Property Name="AdminPwd" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CourseInfo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClassStartTime" Type="datetime" Nullable="false" />
+    <Property Name="CourseAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CourseCredit" Type="int" Nullable="false" />
+    <Property Name="CourseStartTime" Type="datetime" Nullable="false" />
+    <Property Name="CourseEndTime" Type="datetime" Nullable="false" />
+    <Property Name="CourseSumPeople" Type="int" Nullable="false" />
+    <Property Name="CourseNumPeople" Type="int" Nullable="false" />
+    <Property Name="CourseState" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptID" />
+    </Key>
+    <Property Name="DeptID" Type="int" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeID" />
+    </Key>
+    <Property Name="GradeID" Type="int" Nullable="false" />
+    <Property Name="GradeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MajorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Major">
+    <Key>
+      <PropertyRef Name="MajorID" />
+    </Key>
+    <Property Name="MajorID" Type="int" Nullable="false" />
+    <Property Name="MajorName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeptID" Type="int" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="int" Nullable="false" />
+    <Property Name="MessageText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MessageTime" Type="datetime" Nullable="false" />
+    <Property Name="MessageState" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+  </EntityType>
+  <EntityType Name="SelectCourse">
+    <Key>
+      <PropertyRef Name="SelectCourseID" />
+    </Key>
+    <Property Name="SelectCourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="SelectCourseNum" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="StudentName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StudentSex" Type="bit" Nullable="false" />
+    <Property Name="StudentAge" Type="int" Nullable="false" />
+    <Property Name="StudentBirthday" Type="datetime" Nullable="false" />
+    <Property Name="StudentPhone" Type="int" />
+    <Property Name="StudentPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GradeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Tea_Grade">
+    <Key>
+      <PropertyRef Name="Tea_GradeID" />
+    </Key>
+    <Property Name="Tea_GradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="StudentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="TeacherName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TeacherSex" Type="bit" Nullable="false" />
+    <Property Name="TeacherAge" Type="int" Nullable="false" />
+    <Property Name="TeacherBirthday" Type="datetime" Nullable="false" />
+    <Property Name="TeacherPhone" Type="int" Nullable="false" />
+    <Property Name="MajorID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Grade_Major">
+    <End Role="Major" Type="Self.Major" Multiplicity="1" />
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Major">
+        <PropertyRef Name="MajorID" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="MajorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Major_Dept">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="Major" Type="Self.Major" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="DeptID" />
+      </Principal>
+      <Dependent Role="Major">
+        <PropertyRef Name="DeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectCourse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="SelectCourse" Type="Self.SelectCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="SelectCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectCourse_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="SelectCourse" Type="Self.SelectCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="SelectCourse">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectCourse_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="SelectCourse" Type="Self.SelectCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="SelectCourse">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Grade">
+    <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grade">
+        <PropertyRef Name="GradeID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="GradeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tea_Grade_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Tea_Grade" Type="Self.Tea_Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Tea_Grade">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tea_Grade_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Tea_Grade" Type="Self.Tea_Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Tea_Grade">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_Major">
+    <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Major">
+        <PropertyRef Name="MajorID" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="MajorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ZYCourseSelectionModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelectCourse" EntityType="Self.SelectCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tea_Grade" EntityType="Self.Tea_Grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Grade_Major" Association="Self.FK_Grade_Major">
+      <End Role="Major" EntitySet="Major" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Major_Dept" Association="Self.FK_Major_Dept">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="Major" EntitySet="Major" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_Student" Association="Self.FK_Message_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectCourse_Course" Association="Self.FK_SelectCourse_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="SelectCourse" EntitySet="SelectCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectCourse_Student" Association="Self.FK_SelectCourse_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="SelectCourse" EntitySet="SelectCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectCourse_Teacher" Association="Self.FK_SelectCourse_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="SelectCourse" EntitySet="SelectCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Grade" Association="Self.FK_Student_Grade">
+      <End Role="Grade" EntitySet="Grade" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tea_Grade_Student" Association="Self.FK_Tea_Grade_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Tea_Grade" EntitySet="Tea_Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tea_Grade_Teacher" Association="Self.FK_Tea_Grade_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Tea_Grade" EntitySet="Tea_Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Major" Association="Self.FK_Teacher_Major">
+      <End Role="Major" EntitySet="Major" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

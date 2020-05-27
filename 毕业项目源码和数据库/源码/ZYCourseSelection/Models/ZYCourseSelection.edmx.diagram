@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7680a201b2e74864843d9f9312243a74" Name="Diagram1">
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Admin" Width="1.5" PointX="5.375" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Course" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Dept" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Grade" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Major" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Message" Width="1.5" PointX="9.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.SelectCourse" Width="1.5" PointX="9.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Student" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Tea_Grade" Width="1.5" PointX="12.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZYCourseSelectionModel.Teacher" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_SelectCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Major_Dept" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Grade_Major" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Student_Grade" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Teacher_Major" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Message_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_SelectCourse_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_SelectCourse_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Tea_Grade_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ZYCourseSelectionModel.FK_Tea_Grade_Teacher" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
